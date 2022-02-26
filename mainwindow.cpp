@@ -229,3 +229,20 @@ void MainWindow::on_pushButton_2_clicked()
     initBoard(ui->lineEdit->text());
     drawBoard();
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    QImage image(scene->sceneRect().size().toSize(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+
+    QPainter painter(&image);
+    scene->render(&painter);
+
+    QString filename;
+
+    filename = QFileDialog::getSaveFileName(this,
+        tr("Open Image"), "/", tr("Image File (*.png)"));
+
+    image.save(filename);
+
+}
