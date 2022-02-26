@@ -141,6 +141,8 @@ void MainWindow::drawBoard()
         else isWhite = true;
     }
 
+    scene->addRect(0, 0, 519, 519, QPen(Qt::black));
+
     int row =0, col=0;
 
     for(int col = 0; col < 8; col++)
@@ -232,7 +234,11 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QImage image(scene->sceneRect().size().toSize(), QImage::Format_ARGB32);
+    QSize size;
+    size = scene->sceneRect().size().toSize();
+    size.setWidth( size.width() + 2 );
+    size.setHeight( size.height() + 2 );
+    QImage image( size , QImage::Format_ARGB32);
     image.fill(Qt::transparent);
 
     QPainter painter(&image);
